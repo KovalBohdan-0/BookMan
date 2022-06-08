@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+.loginForm {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 30px;
+	padding: 10px;
+	font-family: sans-serif;
+	font-size: 18px;	
+}
+
+.submit {
+	height:50px;
+	border:1px solid;
+	border-radius:25px;
+	outline: none;
+	font-weight :700;
+	cursor:pointer;
+	color:#1c71d8;
+	width:100%;
+}
+
+.input {
+	border-style: none;
+	outline: none;
+	display: flex;
+	width: 70%;
+	max-width: 400px;
+	margin: 0 auto;
+	border-radius: 20px;
+	padding: 1.4rem 2rem 1.6rem;
+	background: #c0bfbc;
+}
+
+.registrationError {
+	color:red;
+	position:relative; 
+	left:50px;
+}
+
