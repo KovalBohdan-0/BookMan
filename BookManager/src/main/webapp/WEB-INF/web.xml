@@ -26,12 +26,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>BookingTableServlet</display-name>
-    <servlet-name>BookingTableServlet</servlet-name>
-    <servlet-class>BookingTableServlet</servlet-class>
+    <display-name>BooksTableServlet</display-name>
+    <servlet-name>BooksTableServlet</servlet-name>
+    <servlet-class>BooksTableServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>BookingTableServlet</servlet-name>
+    <servlet-name>BooksTableServlet</servlet-name>
     <url-pattern>/books</url-pattern>
   </servlet-mapping>
 </web-app>

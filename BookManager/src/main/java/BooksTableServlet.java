@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class BookingTableServlet
  */
-public class BookingTableServlet extends HttpServlet {
+public class BooksTableServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
