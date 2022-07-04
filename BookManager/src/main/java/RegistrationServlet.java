@@ -21,20 +21,6 @@ public class RegistrationServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.getRequestDispatcher("/WEB-INF/registration.jsp").forward(request, response);
-		UsersDBController userController = null;
-		try {
-			userController = new UsersDBController();
-		} catch (ClassNotFoundException | SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		try {
-			System.out.println(userController.usernameIsUsed("fds"));
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	/**
@@ -47,37 +33,35 @@ public class RegistrationServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String repeatedPassword = request.getParameter("repeatedPassword");
+		
+		RegistrationValidator registrationValidator;
+		try {
+			registrationValidator = new RegistrationValidator();
+			String usernameValidationResponse = registrationValidator.usernameIsValid(username);
+			String emailValidationResponse = registrationValidator.emailIsValid(email);
+			String passwordValidationResponse = registrationValidator.passwordIsValid(password);
+			String repeatedPasswordValidationResponse =registrationValidator.repeatedPasswordIsValid(repeatedPassword,
+					password);
 
-		String usernameValidationResponse = ValidateRegistration.usernameIsValid(username);
-		String emailValidationResponse = ValidateRegistration.emailIsValid(email);
-		String passwordValidationResponse = ValidateRegistration.passwordIsValid(password);
-		String repeatedPasswordValidationResponse = ValidateRegistration.repeatedPasswordIsValid(repeatedPassword,
-				password);
+			request.setAttribute("usernameError", usernameValidationResponse);
+			request.setAttribute("emailError", emailValidationResponse);
+			request.setAttribute("passwordError", passwordValidationResponse);
+			request.setAttribute("repeatedPasswordError", repeatedPasswordValidationResponse);
 
-		request.setAttribute("usernameError", usernameValidationResponse);
-		request.setAttribute("emailError", emailValidationResponse);
-		request.setAttribute("passwordError", passwordValidationResponse);
-		request.setAttribute("repeatedPasswordError", repeatedPasswordValidationResponse);
-
-		if (usernameValidationResponse.equals("") && emailValidationResponse.equals("")
-				&& passwordValidationResponse.equals("") && repeatedPasswordValidationResponse.equals("")) {
-			UsersDBController userController = null;
-			try {
+			if (usernameValidationResponse.equals("") && emailValidationResponse.equals("")
+					&& passwordValidationResponse.equals("") && repeatedPasswordValidationResponse.equals("")) {
+				UsersDBController userController = null;
 				userController = new UsersDBController();
-			} catch (ClassNotFoundException | SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			try {
 				userController.addUser(username, email, password);
-			} catch (SQLException | ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				response.sendRedirect("/BookManager/books");
+			} else {
+				request.getRequestDispatcher("/WEB-INF/registration.jsp").forward(request, response);
 			}
-			response.sendRedirect("/BookManager/books");
-		} else {
-			request.getRequestDispatcher("/WEB-INF/registration.jsp").forward(request, response);
+		} catch (ClassNotFoundException | SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
 		}
+		
 
 	}
 

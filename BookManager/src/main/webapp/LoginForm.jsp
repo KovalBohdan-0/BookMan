@@ -9,15 +9,16 @@
 </head>
 <body>
 	<div class="loginForm">
-		<h1 align="center">Welcome</h1>
-		<br> <br> 
-		<input type="text" class="input"
-			placeholder="Username"> <br> <input type="password"
-			class="input" placeholder="Password"> <br>
-		<div align="center">
-			<form action="books">
+		<form action="books" method="post">
+			<h1 align="center">Welcome</h1>
+			<br> <br> <input type="text" class="input" name="email"
+				placeholder="Email"> <br> <input type="password"
+				class="input" name="password" placeholder="Password"> <br>
+			<div align="center">
 				<input type="submit" class="submit" value="Log in"> <br>
-			</form>
+			</div>
+		</form>
+		<div align="center">
 			<h4>Or</h4>
 			<form action="sign-up" method="get">
 				<input type="submit" class="submit" value="Sign up">

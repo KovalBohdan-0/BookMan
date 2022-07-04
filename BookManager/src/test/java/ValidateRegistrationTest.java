@@ -1,77 +1,84 @@
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.sql.SQLException;
+
 import org.junit.jupiter.api.Test;
 
 class ValidateRegistrationTest {
+	private RegistrationValidator registrationValidator;
 	
-	@Test
-	void emptyUsernameShouldReturnError() {
-		assertEquals("Enter your username", ValidateRegistration.usernameIsValid(""));
+	public ValidateRegistrationTest() throws ClassNotFoundException, SQLException {
+		registrationValidator = new RegistrationValidator();
 	}
 	
 	@Test
-	void tooSmallUsernameShouldReturnError() {
-		assertEquals("Username must use only letters and numbers and must have atleast 3 and maximum 17 characters", ValidateRegistration.usernameIsValid("df"));
+	void emptyUsernameShouldReturnError() throws ClassNotFoundException, SQLException {
+		assertEquals("Enter your username", registrationValidator.usernameIsValid(""));
 	}
 	
 	@Test
-	void tooLongUsernameShouldReturnError() {
-		assertEquals("Username must use only letters and numbers and must have atleast 3 and maximum 17 characters", ValidateRegistration.usernameIsValid("alexdfpotdterkidng"));
+	void tooSmallUsernameShouldReturnError() throws ClassNotFoundException, SQLException {
+		assertEquals("Username must use only letters and numbers and must have atleast 3 and maximum 17 characters", registrationValidator.usernameIsValid("df"));
 	}
 	
 	@Test
-	void usernameWithSymbolsShouldReturnError() {
-		assertEquals("Username must use only letters and numbers and must have atleast 3 and maximum 17 characters", ValidateRegistration.usernameIsValid("df"));
+	void tooLongUsernameShouldReturnError() throws ClassNotFoundException, SQLException {
+		assertEquals("Username must use only letters and numbers and must have atleast 3 and maximum 17 characters", registrationValidator.usernameIsValid("alexdfpotdterkidng"));
 	}
 	
 	@Test
-	void validUsernameShouldReturnNothing() {
-		assertEquals("", ValidateRegistration.usernameIsValid("alex"));
+	void usernameWithSymbolsShouldReturnError() throws ClassNotFoundException, SQLException {
+		assertEquals("Username must use only letters and numbers and must have atleast 3 and maximum 17 characters", registrationValidator.usernameIsValid("df"));
 	}
 	
 	@Test
-	void emptyEmailShouldReturnError() {
-		assertEquals("Enter your email", ValidateRegistration.emailIsValid(""));
+	void validUsernameShouldReturnNothing() throws ClassNotFoundException, SQLException {
+		assertEquals("", registrationValidator.usernameIsValid("alex"));
 	}
 	
 	@Test
-	void invalidEmailShouldReturnError() {
-		assertEquals("Input valid email", ValidateRegistration.emailIsValid("alex"));
+	void emptyEmailShouldReturnError() throws SQLException {
+		assertEquals("Enter your email", registrationValidator.emailIsValid(""));
 	}
 	
 	@Test
-	void validEmailShouldReturnNothing() {
-		assertEquals("", ValidateRegistration.emailIsValid("alex@gmail.com"));
+	void invalidEmailShouldReturnError() throws SQLException {
+		assertEquals("Input valid email", registrationValidator.emailIsValid("alex"));
+	}
+	
+	@Test
+	void validEmailShouldReturnNothing() throws SQLException {
+		assertEquals("", registrationValidator.emailIsValid("alex@gmail.com"));
 	}
 	
 	@Test
 	void emptyPasswordShouldReturnError() {
-		assertEquals("Enter your password", ValidateRegistration.passwordIsValid(""));
+		assertEquals("Enter your password", registrationValidator.passwordIsValid(""));
 	}
 	
 	@Test
 	void tooSmallPasswordShouldReturnError() {
-		assertEquals("Password must use only letters and numbers and must have atleast 6 and maximum 21 characters", ValidateRegistration.passwordIsValid("df"));
+		assertEquals("Password must use only letters and numbers and must have atleast 6 and maximum 21 characters", registrationValidator.passwordIsValid("df"));
 	}
 	
 	@Test
 	void tooLongPasswordShouldReturnError() {
-		assertEquals("Password must use only letters and numbers and must have atleast 6 and maximum 21 characters", ValidateRegistration.passwordIsValid("alexdfpotdter58j3kidng"));
+		assertEquals("Password must use only letters and numbers and must have atleast 6 and maximum 21 characters", registrationValidator.passwordIsValid("alexdfpotdter58j3kidng"));
 	}
 	
 	@Test
 	void passwordWithSymbolsShouldReturnError() {
-		assertEquals("Password must use only letters and numbers and must have atleast 6 and maximum 21 characters", ValidateRegistration.passwordIsValid("dffd_>gfd"));
+		assertEquals("Password must use only letters and numbers and must have atleast 6 and maximum 21 characters", registrationValidator.passwordIsValid("dffd_>gfd"));
 	}
 	
 	@Test
 	void validPasswordShouldReturnNothing() {
-		assertEquals("", ValidateRegistration.passwordIsValid("O4jKmLff"));
+		assertEquals("", registrationValidator.passwordIsValid("O4jKmLff"));
 	}
 	
 	@Test
 	void emptyRepeatedPasswordShouldReturnError() {
-		assertEquals("Repeat your password", ValidateRegistration.repeatedPasswordIsValid("" ,"password"));
+		assertEquals("Repeat your password", registrationValidator.repeatedPasswordIsValid("" ,"password"));
 	}
 	
 }
