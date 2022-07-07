@@ -1,8 +1,11 @@
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
 public class UsersDBController {
@@ -26,9 +29,10 @@ public class UsersDBController {
 				"INSERT INTO users(username,password,email) VALUES(\'%s\',\'%s\',\'%s\');", username, password, email));
 	}
 
-	public void addBook(String name, String author, String email, int pagesCount, String description) throws SQLException {
+	public void addBook(String name, String author, String email, int pagesCount, String description)
+			throws SQLException {
 		statement.executeUpdate(String.format(
-				"INSERT INTO books(name, author, email, pagescount, description) VALUES(\'%s\',\'%s\',\'%s\',\'d\',\'s\');",
+				"INSERT INTO books(name, author, email, pagescount, description) VALUES(\'%s\',\'%s\',\'%s\',\'%d\',\'%s\');",
 				name, author, email, pagesCount, description));
 	}
 
@@ -56,5 +60,19 @@ public class UsersDBController {
 		}
 
 		return false;
+	}
+
+	public ArrayList<Book> selectUsersBooks(String email) throws SQLException {
+		ResultSet rs = statement.executeQuery(String.format(" SELECT * FROM books WHERE email='%s';", email));
+		ArrayList<Book> books = new ArrayList<>();
+		
+		while (rs.next()) {
+			System.out.println(rs.getString("name"));
+			Book book = new Book(rs.getString("name"), rs.getString("author"), email, rs.getString("pagesCount"), rs.getString("description"));
+			books.add(book);
+			
+		}
+		
+		return books;
 	}
 }
