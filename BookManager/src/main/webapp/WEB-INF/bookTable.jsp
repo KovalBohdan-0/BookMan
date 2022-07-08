@@ -7,26 +7,24 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<form action="addBook" method="post">
+		<input id="books" type="submit" name="addBook" value="+ Add new book">
+	</form>
 
-	<table id="customers">
+	<table id="books">
 		<tr>
 			<th>Name</th>
 			<th>Author</th>
 			<th>Pages</th>
 			<th>Description</th>
 		</tr>
-		<tr>
-			<td>Alfreds Futterkiste</td>
-			<td>Maria Anders</td>
-			<td>Germany</td>
-		</tr>
 		<c:forEach var="book" items="${books}">
-			<td>
-				<c:out value="${books.name}" />
-				<c:out value="${books.author}" />
-				<c:out value="${books.pagesCount}" />
-				<c:out value="${books.description}" />
-			</td>
+			<tr>
+				<td><c:out value="${book.getName()}" /></td>
+				<td><c:out value="${book.getAuthor()}" /></td>
+				<td><c:out value="${book.getPagesCount()}" /></td>
+				<td><c:out value="${book.getDescription()}" /></td>
+			</tr>
 		</c:forEach>
 
 	</table>

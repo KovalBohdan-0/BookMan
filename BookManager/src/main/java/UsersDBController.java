@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 
 public class UsersDBController {
@@ -62,15 +63,13 @@ public class UsersDBController {
 		return false;
 	}
 
-	public ArrayList<Book> selectUsersBooks(String email) throws SQLException {
+	public List<Book> selectUsersBooks(String email) throws SQLException {
 		ResultSet rs = statement.executeQuery(String.format(" SELECT * FROM books WHERE email='%s';", email));
-		ArrayList<Book> books = new ArrayList<>();
+		List<Book> books = new ArrayList<>();
 		
 		while (rs.next()) {
-			System.out.println(rs.getString("name"));
 			Book book = new Book(rs.getString("name"), rs.getString("author"), email, rs.getString("pagesCount"), rs.getString("description"));
 			books.add(book);
-			
 		}
 		
 		return books;
