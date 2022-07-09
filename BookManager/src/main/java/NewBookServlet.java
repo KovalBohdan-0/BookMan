@@ -50,15 +50,10 @@ public class NewBookServlet extends HttpServlet {
 			if (usersController.login(email, password) == true) {
 				request.getRequestDispatcher("/WEB-INF/newBook.jsp").forward(request, response);
 
-				String name = "";
-				String author = "";
-				String pages = "";
-				String description = "";
-
-				name = request.getParameter("name");
-				author = request.getParameter("author");
-				pages = request.getParameter("pages");
-				description = request.getParameter("description");
+				String name = request.getParameter("name");
+				String author = request.getParameter("author");
+				String pages = request.getParameter("pages");
+				String description = request.getParameter("description");
 
 				if (name != null && author != null) {
 					usersController.addBook(name, author, email, pages, description);
