@@ -34,4 +34,14 @@
     <servlet-name>BooksTableServlet</servlet-name>
     <url-pattern>/books</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <description></description>
+    <display-name>NewBookServlet</display-name>
+    <servlet-name>NewBookServlet</servlet-name>
+    <servlet-class>NewBookServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewBookServlet</servlet-name>
+    <url-pattern>/addBook</url-pattern>
+  </servlet-mapping>
 </web-app>

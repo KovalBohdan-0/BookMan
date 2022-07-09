@@ -8,9 +8,9 @@
 </head>
 <body>
 	<form action="addBook" method="post">
-		<input id="books" type="submit" name="addBook" value="+ Add new book">
+		<input type="submit" name="addBook" value="+ Add new book">
 	</form>
-
+	<br />
 	<table id="books">
 		<tr>
 			<th>Name</th>

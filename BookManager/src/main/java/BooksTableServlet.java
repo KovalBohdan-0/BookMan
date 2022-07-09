@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -37,6 +38,15 @@ public class BooksTableServlet extends HttpServlet {
 //					usersController.addBook("name1", "author", "user1@gmail.com", 0, "de th cription");	
 //				}
 				
+				// Add email and passwords cookies for 30 days
+				Cookie emailCookie = new Cookie("email", email);
+				emailCookie.setMaxAge(30*24*60*60);
+				response.addCookie(emailCookie);
+				Cookie passwordCookie = new Cookie("password", password);
+				passwordCookie.setMaxAge(30*24*60*60);
+				response.addCookie(passwordCookie);
+				
+				//Create list books and transport it to jsp file
 				List<Book> books = usersController.selectUsersBooks(email);
 				request.setAttribute("books", books);
 				request.getRequestDispatcher("/WEB-INF/bookTable.jsp").forward(request, response);

@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
@@ -30,11 +29,21 @@ public class UsersDBController {
 				"INSERT INTO users(username,password,email) VALUES(\'%s\',\'%s\',\'%s\');", username, password, email));
 	}
 
-	public void addBook(String name, String author, String email, int pagesCount, String description)
+	public void addBook(String name, String author, String email, String pages, String description)
 			throws SQLException {
+		int pageCount = 0;
+
+		if (!pages.equals("")) {
+			try {
+				Integer.parseInt(pages);
+				pageCount = Integer.parseInt(pages);
+			} catch (NumberFormatException e) {	
+			}
+		}
 		statement.executeUpdate(String.format(
 				"INSERT INTO books(name, author, email, pagescount, description) VALUES(\'%s\',\'%s\',\'%s\',\'%d\',\'%s\');",
-				name, author, email, pagesCount, description));
+				name, author, email, pageCount, description));
+
 	}
 
 	public boolean usernameIsUsed(String username) throws SQLException, ClassNotFoundException {
@@ -66,12 +75,12 @@ public class UsersDBController {
 	public List<Book> selectUsersBooks(String email) throws SQLException {
 		ResultSet rs = statement.executeQuery(String.format(" SELECT * FROM books WHERE email='%s';", email));
 		List<Book> books = new ArrayList<>();
-		
+
 		while (rs.next()) {
-			Book book = new Book(rs.getString("name"), rs.getString("author"), email, rs.getString("pagesCount"), rs.getString("description"));
+			Book book = new Book(rs.getString("name"), rs.getString("author"), email, rs.getString("pagescount"), rs.getString("description"));
 			books.add(book);
 		}
-		
+
 		return books;
 	}
 }
