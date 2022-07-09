@@ -12,7 +12,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/LoginServlet</url-pattern>
+    <url-pattern>/login</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -26,12 +26,22 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>BookingTableServlet</display-name>
-    <servlet-name>BookingTableServlet</servlet-name>
-    <servlet-class>BookingTableServlet</servlet-class>
+    <display-name>BooksTableServlet</display-name>
+    <servlet-name>BooksTableServlet</servlet-name>
+    <servlet-class>BooksTableServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>BookingTableServlet</servlet-name>
+    <servlet-name>BooksTableServlet</servlet-name>
     <url-pattern>/books</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <description></description>
+    <display-name>NewBookServlet</display-name>
+    <servlet-name>NewBookServlet</servlet-name>
+    <servlet-class>NewBookServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewBookServlet</servlet-name>
+    <url-pattern>/addBook</url-pattern>
   </servlet-mapping>
 </web-app>
